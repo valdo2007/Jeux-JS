@@ -1,0 +1,18 @@
+table {
+  margin: 20px auto;
+  border-collapse: collapse;
+}
+
+td {
+  width: 80px;
+  height: 80px;
+  border: 3px solid #2c3e50;
+  font-size: 40px;
+  text-align: center;
+  cursor: pointer;
+  background-color: white;
+}
+
+td:hover {
+  background-color: #dfe6e9;
+}

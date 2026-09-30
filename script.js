@@ -42,8 +42,8 @@ function jouerQuiz() {
 
     let reponse = prompt("Quelle est la capitale de : " + listePays[position] + " ?");
 
-    if (reponse.toLowerCase() === listeCapitales[position].toLowerCase()) {
-      score = score + 1;
+    if (reponse === listeCapitales[position]) {
+      score ++;
       alert("Bonne réponse !");
     } else {
       alert("Faux, c'était : " + listeCapitales[position]);
@@ -59,6 +59,132 @@ function jouerQuiz() {
 
 
 
+
+
+
+
+
+
+
+
+
+function afficherPlateau(plateau) {
+    console.log("");
+    console.log(plateau[0] + " | " + plateau[1] + " | " + plateau[2]);
+    console.log("---------");
+    console.log(plateau[3] + " | " + plateau[4] + " | " + plateau[5]);
+    console.log("---------");
+    console.log(plateau[6] + " | " + plateau[7] + " | " + plateau[8]);
+    console.log("");
+}
+
+
+function aGagne(plateau, joueur) {
+
+    if (plateau[0] === joueur && plateau[1] === joueur && plateau[2] === joueur) {
+        return true;
+    }
+
+    if (plateau[3] === joueur && plateau[4] === joueur && plateau[5] === joueur) {
+        return true;
+    }
+
+    if (plateau[6] === joueur && plateau[7] === joueur && plateau[8] === joueur) {
+        return true;
+    }
+
+    if (plateau[0] === joueur && plateau[3] === joueur && plateau[6] === joueur) {
+        return true;
+    }
+
+    if (plateau[1] === joueur && plateau[4] === joueur && plateau[7] === joueur) {
+        return true;
+    }
+
+    if (plateau[2] === joueur && plateau[5] === joueur && plateau[8] === joueur) {
+        return true;
+    }
+
+    if (plateau[0] === joueur && plateau[4] === joueur && plateau[8] === joueur) {
+        return true;
+    }
+
+    if (plateau[2] === joueur && plateau[4] === joueur && plateau[6] === joueur) {
+        return true;
+    }
+
+    return false;
+}
+
+
+function jouerMorpion() {
+
+    let plateau = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+    let joueur1 = prompt("Nom du joueur 1 :");
+    let joueur2 = prompt("Nom du joueur 2 :");
+
+    let joueur = "X";
+    let tour = 0;
+    let partieFinie = false;
+
+    console.log("");
+    console.log(joueur1 + " = X");
+    console.log(joueur2 + " = O");
+    console.log("");
+
+    while (partieFinie === false) {
+
+        afficherPlateau(plateau);
+
+        let nomJoueur;
+
+        if (joueur === "X") {
+            nomJoueur = joueur1;
+        } else {
+            nomJoueur = joueur2;
+        }
+
+        let choix = Number(
+            prompt(nomJoueur + " (" + joueur + "), choisissez une case de 1 à 9 :")
+        );
+
+        if (choix < 1 || choix > 9 || isNaN(choix)) {
+            console.log("Veuillez choisir un numéro entre 1 et 9.");
+            continue;
+        }
+
+        if (plateau[choix - 1] === "X" || plateau[choix - 1] === "O") {
+            console.log("Cette case est déjà occupée.");
+            continue;
+        }
+
+        plateau[choix - 1] = joueur;
+
+        tour++;
+
+        if (aGagne(plateau, joueur)) {
+
+            afficherPlateau(plateau);
+            console.log(nomJoueur + " a gagné !");
+            partieFinie = true;
+
+        } else if (tour === 9) {
+
+            afficherPlateau(plateau);
+            console.log("Match nul !");
+            partieFinie = true;
+
+        } else {
+
+            if (joueur === "X") {
+                joueur = "O";
+            } else {
+                joueur = "X";
+            }
+        }
+    }
+}
 
 
 function main() {
@@ -82,9 +208,7 @@ function main() {
 }
 main();
 
-function Morpion(){
 
-}
 
 
 
